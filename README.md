@@ -7,13 +7,13 @@ A secure, web-based smart voting system that uses real-time **facial recognition
 
 ## 📌 Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [System Architecture](#system-architecture)
-- [Getting Started](#getting-started)
-- [Future Enhancements](#future-enhancements)
-- [License](#license)
+- [Overview](#Overview)
+- [Features](#Features)
+- [Tech Stack](#Tech-Stack)
+- [System Architecture](#System-Architecture)
+- [Getting Started](#Getting-Started)
+- [Future Enhancements](#Future-Enhancements)
+- [License](#License)
 
 ---
 
