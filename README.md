@@ -14,8 +14,6 @@ A secure, web-based smart voting system that uses real-time **facial recognition
 - [Getting Started](#%EF%B8%8F-getting-started)
 - [Future Enhancements](#-future-enhancements)
 - [License](#-license)
-- [Contribution & Feedback](#EF%B8%8F-contribution--feedback)
-
 ---
 
 ## 📖 Overview
@@ -132,7 +130,3 @@ This project introduces an innovative **facial recognition-based voting platform
 This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
 
 ---
-
-## 🙋‍♀️ Contribution & Feedback
-
-Contributions, feedback, and ideas are welcome! Please feel free to fork this repository, open an issue, or submit a pull request.
