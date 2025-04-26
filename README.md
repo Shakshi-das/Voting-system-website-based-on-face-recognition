@@ -101,14 +101,7 @@ This project introduces an innovative **facial recognition-based voting platform
    ./mvnw spring-boot:run
    ```
 
-3. **Run frontend (ReactJS):**
-   ```bash
-   cd frontend
-   npm install
-   npm start
-   ```
-
-4. **Face Recognition Module (Python):**
+3. **Face Recognition Module (Python):**
    - Run training and recognition scripts using OpenCV.
    - Ensure Haar Cascade XML and LBPH training data are correctly configured.
 
@@ -116,13 +109,10 @@ This project introduces an innovative **facial recognition-based voting platform
 
 ## 🔮 Future Enhancements
 
-- 🌍 **Blockchain integration** for tamper-proof vote logging
 - 🧠 **AI-based liveness detection** (deepfake prevention)
 - 📱 **Mobile app** with camera-based authentication
 - 🗣️ **Voice/multilingual support** for accessibility
 - ☁️ **Cloud deployment** for national-scale elections
-- 🔐 **Quantum-safe encryption** & federated data learning
-
 ---
 
 ## 📄 License
