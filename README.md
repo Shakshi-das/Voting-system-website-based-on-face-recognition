@@ -83,10 +83,10 @@ This project introduces an innovative **facial recognition-based voting platform
 > 🔧 **Note:** Project is still under active development. Setup instructions may evolve.
 
 ### Prerequisites
-- Node.js & npm
 - Java 11+ (for Spring Boot)
 - MySQL/MongoDB
 - Python & OpenCV (for face data capture)
+- pip
 
 ### Installation
 
@@ -105,6 +105,26 @@ This project introduces an innovative **facial recognition-based voting platform
 3. **Face Recognition Module (Python):**
    - Run training and recognition scripts using OpenCV.
    - Ensure Haar Cascade XML and LBPH training data are correctly configured.
+
+---
+
+
+## 📡 API Endpoints
+
+### Authentication
+
+* `POST /register-voter/`: Register a new voter with facial data.
+* `POST /authenticate-voter/`: Authenticate a voter using facial recognition.
+
+### Voting
+
+* `GET /candidates/`: Retrieve the list of candidates.
+* `POST /vote/`: Cast a vote for a candidate.
+
+### Admin
+
+* `GET /admin/results/`: View election results.
+* `GET /admin/voters/`: View registered voters.
 
 ---
 
