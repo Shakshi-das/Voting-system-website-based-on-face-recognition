@@ -1,7 +1,7 @@
 
 # 🗳️ Voting System Website Using Face Recognition
 
-A secure, web-based smart voting system that uses real-time **facial recognition** for voter authentication, enhancing election integrity by reducing fraud, manual errors, and inefficiencies. This project leverages **OpenCV**, **ReactJS**, and **Spring Boot** to offer a modern, tamper-resistant alternative to traditional voting processes.
+A secure, web-based smart voting system that uses real-time **facial recognition** for voter authentication, enhancing election integrity by reducing fraud, manual errors, and inefficiencies. This project leverages **OpenCV**, **FastAP**, **Spring Boot** and face recognition libraries to offer a modern, tamper-resistant alternative to traditional voting processes.
 
 ---
 
@@ -35,7 +35,13 @@ This project introduces an innovative **facial recognition-based voting platform
 - **User Registration** with biometric (facial) data
 - **Login Authentication** using face recognition + password
 - **Vote Casting Interface** with candidate confirmation
-- **Encrypted Vote Storage** to ensure anonymity
+- **Candidate Management**: Admins can add, update, and manage candidate information.
+- **Vote Casting**: Authenticated voters can cast their votes securely.
+- **One-Vote Policy**: Ensures that each voter can vote only once.
+- **Admin Dashboard**: View statistics, manage voter registrations, and oversee election data.
+- **Results Tallying**: Automatically count and display election results with integrity.
+
+---
 
 ### ⚙️ Security & Verification
 - Facial recognition via Haar Cascade + LBPH (OpenCV)
@@ -54,11 +60,11 @@ This project introduces an innovative **facial recognition-based voting platform
 
 | Layer        | Technology                        |
 |-------------|-----------------------------------|
-| **Frontend** | ReactJS, HTML, CSS, Bootstrap     |
-| **Backend**  | Spring Boot, JWT, OAuth2          |
-| **Database** | MySQL / MongoDB + JPA/Hibernate   |
+| **Frontend** | HTML, CSS, JS, Bootstrap     |
+| **Backend**  | FastAPI, Spring Boot, JWT, OAuth2          |
+| **Database** | MySQL / MongoDB    |
 | **Face Recognition** | OpenCV (Haar Cascade, LBPH) |
-| **Security** | HTTPS, JWT, OAuth2, bcrypt        |
+| **Deployment** |    Uvicorn server     |
 
 ---
 
