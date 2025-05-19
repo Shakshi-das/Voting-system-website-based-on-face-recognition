@@ -119,17 +119,18 @@ This project introduces an innovative **facial recognition-based voting platform
 
 ### Authentication
 
-* `POST /register-voter/`: Register a new voter with facial data.
-* `POST /authenticate-voter/`: Authenticate a voter using facial recognition.
+* `POST /register-html/`: Register a new voter with facial data.
+* `POST /login-html/`: Authenticate a voter using facial recognition.
+* `POST /index-html/`: Home page of the site
 
 ### Voting
 
 * `GET /candidates/`: Retrieve the list of candidates.
-* `POST /vote/`: Cast a vote for a candidate.
+* `POST /vote/`: Cast a vote for a verified user.
 
 ### Admin
 
-* `GET /admin/results/`: View election results.
+* `GET /admin/vote_results/`: View election results.
 * `GET /admin/voters/`: View registered voters.
 
 ---
