@@ -1,1 +1,386 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+  }
+  
+  .container {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+  }
+  
+  h1, h2 {
+    margin-bottom: 24px;
+    font-size: 28px;
+  }
+  
+  input[type="text"],
+  input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    outline: none;
+    font-size: 16px;
+  }
+  
+  .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #45a049;
+  }
+  
+  a {
+    color: #aee1f9;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
 
+  .video-preview {
+    display: none;
+    margin-top: 10px;
+  }
+  
+  .canvas-hidden {
+    display: none;
+  }
+  
+  .captured-img {
+    display: none;
+    width: 320px;
+    height: 240px;
+    margin-top: 10px;
+    border: 2px solid white;
+    border-radius: 10px;
+  }
+  
+  .error-message {
+    color: red;
+    margin-top: 10px;
+    display: none;
+  }
+  
+  .form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    align-items: center;
+  }
+  
+/* Home page styles here */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #ffffff;
+  margin: 0;
+}
+
+/* Header section */
+.site-header {
+  text-align: center;
+  padding: 30px 20px 10px;
+}
+
+.main-heading {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.sub-heading {
+  font-size: 20px;
+  font-weight: 600;
+  color: #aee1f9;
+}
+
+.result-btn-container {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+/* Main content */
+.home-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 50px 40px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h3 {
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+
+.card button {
+  margin-top: 10px;
+}
+
+/* Footer fixed at bottom */
+footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 14px;
+  color: #cccccc;
+}
+
+/* Dashboard styles */
+
+/* Voting Dashboard Header */
+.site-header {
+  position: relative;
+  text-align: center;
+  padding: 20px 20px 10px;
+}
+
+.main-heading {
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.sub-header {
+  margin-top: 5px;
+}
+
+.sub-heading {
+  font-size: 22px;
+  font-weight: 600;
+  color: #aee1f9;
+  margin-bottom: 5px;
+}
+
+.verified-badge {
+  font-size: 16px;
+  color: #90ee90;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* Home button at top right */
+.home-btn-container {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+/* Cards section */
+.home-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 50px 40px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h3 {
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.party-name {
+  color: #aee1f9;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.card button {
+  margin-top: 10px;
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+  padding: 15px;
+  font-size: 14px;
+  color: #cccccc;
+  text-align: center;
+}
+
+/* Results page styles */
+.site-header {
+  text-align: center;
+  padding-top: 40px;
+}
+
+.main-heading {
+  font-size: 42px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.home-btn-container {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.winner-card {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 60px 50px; 
+  width: 500px; 
+  min-height: 250px; 
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  margin-bottom: 60px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.winner-card h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.winner-card p {
+  font-size: 20px;
+  margin: 5px 0;
+  color: #aee1f9;
+}
+
+.votes-table-section {
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.votes-table-section h3 {
+  margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+.votes-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.votes-table th, .votes-table td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.votes-table th {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+footer {
+  margin-top: auto;
+  padding: 15px;
+  font-size: 14px;
+  color: #cccccc;
+  text-align: center;
+}
