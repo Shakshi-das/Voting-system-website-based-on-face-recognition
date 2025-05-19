@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voter Registration</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Voter Registration</h1>
+    <form id="registerForm">
+      <div class="form-group">
+        <input type="text" id="name" placeholder="Full Name" required />
+      </div>
+      <div class="form-group">
+        <input type="text" id="voterId" placeholder="Voter ID" required />
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" placeholder="Create Password" required />
+      </div>
+      <div class="form-group">
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn" onclick="startCamera()">Start Camera</button>
+      </div>
+      <div class="form-group">
+        <video id="video" width="320" height="240" autoplay class="video-preview">
+          Your browser does not support the video tag.
+        </video>
+        <canvas id="canvas" width="320" height="240" class="canvas-hidden">
+          Your browser does not support the canvas tag.
+        </canvas>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn" onclick="capture()">📸 Capture Face</button>
+      </div>
+      <div class="form-group">
+        <img id="capturedImage" alt="Captured face preview" class="captured-img" />
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn">Register</button>
+      </div>
+      <div id="passwordError" role="alert" class="error-message">Passwords do not match!</div>
+    </form>
+  </div>
+
+<script>
+  const video = document.getElementById('video');
+  const canvas = document.getElementById('canvas');
+  const capturedImage = document.getElementById('capturedImage');
+  const imageData = document.createElement('input');
+  imageData.type = 'hidden';
+  imageData.id = 'imageData';
+  document.getElementById('registerForm').appendChild(imageData);
+
+  const context = canvas.getContext('2d');
+  let streamStarted = false;
+  let stream;
+
+  function startCamera() {
+    if (!streamStarted) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(s => {
+          stream = s;
+          video.srcObject = stream;
+          video.style.display = 'block';
+          streamStarted = true;
+        })
+        .catch(() => {
+          alert('Please allow camera access');
+        });
+    }
+  }
+
+  function capture() {
+    if (!streamStarted) {
+      alert('Start the camera first!');
+      return;
+    }
+    context.drawImage(video, 0, 0, 320, 240);
+    const dataURL = canvas.toDataURL('image/png');
+    imageData.value = dataURL;
+
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+    }
+    video.style.display = 'none';
+    streamStarted = false;
+    capturedImage.src = dataURL;
+    capturedImage.style.display = 'block';
+  }
+
+  function validatePasswords() {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const errorDiv = document.getElementById('passwordError');
+
+    if (password !== confirmPassword) {
+      errorDiv.style.display = 'block';
+    } else {
+      errorDiv.style.display = 'none';
+    }
+  }
+
+  document.getElementById('confirmPassword').addEventListener('keyup', validatePasswords);
+  document.getElementById('password').addEventListener('keyup', validatePasswords);
+
+  document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (password.trim() === '' || confirmPassword.trim() === '') {
+      alert('Password fields cannot be empty.');
+      return;
+    }
+    if (password !== confirmPassword) {
+      alert('Passwords do not match.');
+      return;
+    }
+
+    const payload = {
+      name: document.getElementById('name').value,
+      voterId: document.getElementById('voterId').value,
+      password: password,
+      faceImage: document.getElementById('imageData').value
+    };
+
+    fetch("/register", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert(data.message);
+      if (data.message === 'Registration successful!'|| data.message === 'Voter ID already exists!') {
+        setTimeout(() => {
+          window.location.href = "/login.html";
+        }, 200);
+      }
+    })
+    .catch(err => console.error('Registration error:', err));
+  });
+</script>
+</body>
+</html>

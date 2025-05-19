@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voter Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Voter Login</h1>
+    <form id="loginForm">
+      
+      <!-- Name input added -->
+      <div class="form-group">
+        <input type="text" id="name" placeholder="Name" required />
+      </div>
+
+      <div class="form-group">
+        <input type="text" id="voterId" placeholder="Voter ID" required />
+      </div>
+
+      <div class="form-group">
+        <input type="password" id="password" placeholder="Password" required />
+      </div>
+
+      <div class="form-group">
+        <button type="button" class="btn" onclick="startCamera()">Start Camera</button>
+      </div>
+
+      <div class="form-group">
+        <video id="video" width="320" height="240" autoplay class="video-preview">
+          Your browser does not support the video tag.
+        </video>
+        <canvas id="canvas" width="320" height="240" class="canvas-hidden">
+          Your browser does not support the canvas tag.
+        </canvas>
+      </div>
+
+      <div class="form-group">
+        <button type="button" class="btn" onclick="capture()">📸 Capture Face</button>
+      </div>
+
+      <div class="form-group">
+        <img id="capturedImage" alt="Captured face preview" class="captured-img" />
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn">Login</button>
+      </div>
+
+    </form>
+  </div>
+
+<script>
+  const video = document.getElementById('video');
+  const canvas = document.getElementById('canvas');
+  const capturedImage = document.getElementById('capturedImage');
+  const context = canvas.getContext('2d');
+
+  const imageData = document.createElement('input');
+  imageData.type = 'hidden';
+  imageData.id = 'imageData';
+  document.getElementById('loginForm').appendChild(imageData);
+
+  let streamStarted = false;
+  let stream;
+
+  function startCamera() {
+    if (!streamStarted) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(s => {
+          stream = s;
+          video.srcObject = stream;
+          video.style.display = 'block';
+          streamStarted = true;
+        })
+        .catch(() => {
+          alert('Please allow camera access');
+        });
+    }
+  }
+
+  function capture() {
+    if (!streamStarted) {
+      alert('Start the camera first!');
+      return;
+    }
+    context.drawImage(video, 0, 0, 320, 240);
+    const dataURL = canvas.toDataURL('image/png');
+    imageData.value = dataURL;
+
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+    }
+    video.style.display = 'none';
+    streamStarted = false;
+    capturedImage.src = dataURL;
+    capturedImage.style.display = 'block';
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const payload = {
+      name: document.getElementById('name').value,     // Name field captured
+      voterId: document.getElementById('voterId').value,
+      password: document.getElementById('password').value,
+      faceImage: document.getElementById('imageData').value
+    };
+
+    fetch("/login", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert(data.message);
+      
+      if (data.message === "Login successfull!") {  // Corrected spelling from 'successfull'
+        localStorage.setItem('voterId', payload.voterId);
+        localStorage.setItem('voterName', payload.name);
+        setTimeout(() => {
+          window.location.href = "/dashboard.html";
+        }, 200);
+      }
+    })
+    .catch(err => console.error('Login error:', err));
+  });
+</script>
+
+</body>
+</html>
