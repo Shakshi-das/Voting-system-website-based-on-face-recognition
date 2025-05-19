@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voting Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="home-btn-container">
+    <button class="btn" onclick="window.location.href='index.html'">Home</button>
+  </div>
+
+  <header class="site-header">
+    <h1 class="main-heading">Voting Dashboard</h1>
+    <div class="sub-header">
+      <h2 class="sub-heading" id="welcomeName">Welcome, Voter!</h2>
+      <div class="verified-badge">✅ Identity Verified</div>
+    </div>
+  </header>  
+
+  <main class="home-container">
+    <div class="cards-container">
+      <div class="card">
+        <h3>Candidate A</h3>
+        <p class="party-name">Party: Bhartiya Janta Party </p>
+        <button class="btn" onclick="vote('BJP')">Vote</button>
+      </div>
+      <div class="card">
+        <h3>Candidate B</h3>
+        <p class="party-name">Party: Congress</p>
+        <button class="btn" onclick="vote('CNG')">Vote</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    Secure Voting | Transparency | Trust
+  </footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const voterName = localStorage.getItem('voterName');
+    if (voterName) {
+      document.getElementById('welcomeName').innerText = "Welcome, " + voterName + "!";
+    }
+  });
+
+  function vote(candidate) {
+    const voterId = localStorage.getItem('voterId');
+    if (!voterId) {
+      alert('Voter ID not found. Please login again.');
+      window.location.href = "/login.html";
+      return;
+    }
+
+    fetch('/vote?voterId=' + encodeURIComponent(voterId) + '&candidate=' + encodeURIComponent(candidate), {
+      method: 'POST'
+    })
+    .then(response => response.text())
+    .then(data => {
+      alert(data); // your backend returns simple String like "Vote recorded successfully!"
+      if (data.includes("Vote recorded successfully!") || data.includes("You have already voted!")) {
+        localStorage.clear();
+        setTimeout(() => {
+          window.location.href = "/index.html";
+        }, 1000);
+      }
+    })
+    .catch(error => {
+      console.error('Voting error:', error);
+      alert('Failed to record your vote. Please try again.');
+    });
+  }
+</script>
+
+</body>
+</html>

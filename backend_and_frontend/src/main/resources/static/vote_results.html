@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voting Results</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style2.css" />
+</head>
+<body>
+
+  <div class="home-btn-container">
+    <button class="btn" onclick="window.location.href='index.html'"> Home</button>
+  </div>
+
+  <header class="site-header">
+    <h1 class="main-heading">Voting Results</h1>
+  </header>
+
+  <main class="result-container">
+    <div class="winner-card">
+      <h2 id="winner">🏆 Winning Party: Liberty Party</h2>
+      <p id="winningCandidate"> Liberty Party</p>
+    </div>
+
+    <div class="votes-table-section">
+      <h3>Vote Summary</h3>
+      <table class="votes-table">
+        <thead>
+          <tr>
+            <th>Candidate</th>
+            <th>Party</th>
+            <th>Votes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BJP</td>
+            <td>BJP</td>
+            <td id="votesA">0</td>
+          </tr>
+          <tr>
+            <td>CNG</td>
+            <td>Congress</td>
+            <td id="votesB">0</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Smart Voting System | Secure • Transparent • Fast
+  </footer>
+
+  <script>
+    // Function to fetch vote counts from the backend and update the page
+    async function fetchVoteCounts() {
+      try {
+        const response = await fetch("/vote-counts");  // Adjust the URL if needed (e.g., add your domain or port)
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        
+        const voteCounts = await response.json(); // Parse JSON data from the backend
+        updateResults(voteCounts);  // Call function to update UI
+      } catch (error) {
+        console.error('Error fetching vote counts:', error);
+      }
+    }
+  
+    // Function to update the UI with vote counts
+    function updateResults(votes) {
+      // Assuming your backend returns a JSON like: {"BJP": 150, "CNG": 120}
+      const votesBJP = votes['BJP'] || 0;
+      const votesCNG = votes['CNG'] || 0;
+    
+      document.getElementById('votesA').innerText = votesBJP;
+      document.getElementById('votesB').innerText = votesCNG;
+    
+      if (votesBJP > votesCNG) {
+        document.getElementById('winner').innerText = "🏆 Winning Party: BJP";
+        document.getElementById('winningCandidate').innerText = "BJP - Bhartiya Janta Party";
+      } else if (votesCNG > votesBJP) {
+        document.getElementById('winner').innerText = "🏆 Winning Party: Congress";
+        document.getElementById('winningCandidate').innerText = "CNG - Congress";
+      } else {
+        // This is a proper tie case, if both votes are equal
+        document.getElementById('winner').innerText = "It's a Tie!";
+        document.getElementById('winningCandidate').innerText = "Both Candidates";
+      }
+    }
+    
+  
+    // Fetch vote counts when the page is loaded
+    document.addEventListener("DOMContentLoaded", fetchVoteCounts);
+  </script>*/
+  
+
+</body>
+</html>
